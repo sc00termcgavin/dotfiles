@@ -1,0 +1,1 @@
+export DOT="$HOME/.dotfiles"
