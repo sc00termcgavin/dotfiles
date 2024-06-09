@@ -19,16 +19,18 @@ export PATH=$(brew --prefix)/bin:$PATH
 export CLICOLOR=1
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
+export GOPATH="$HOME/go"
+export PATH=$PATH:$GOPATH/bin
+export PATH="/usr/local/texlive/2023/bin/universal-darwin:$PATH"
+
+#python
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
 
-plugin=(
-  pyenv
-)
 
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 #Node
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -200,15 +202,12 @@ eval "$(starship init zsh)"
 # Python env
 # alias brew='env PATH="${PATH//$(pyenv root)/shims:/}" brew'
 
-#export PYENV_ROOT="$HOME/.pyenv"
-#[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-#if command -v pyenv 1>/dev/null 2>&1; then
-#  eval "$(pyenv init -)"   
-#  eval "$(pyenv virtualenv-init -)"
-#fi 
+
 
 # gpg
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 gpg-connect-agent UPDATESTARTUPTTY /bye > /dev/null
+
+

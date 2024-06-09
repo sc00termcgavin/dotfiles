@@ -18,4 +18,4 @@ export SHELL_SESSIONS_DISABLE=1
 
 # less-history-file
 export LESSHISTFILE=-
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
